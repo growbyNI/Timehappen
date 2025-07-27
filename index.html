@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Lifetime Countdown</title>
+    <title>Countdown from July 27, 2025</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -66,65 +66,8 @@
             line-height: 1.6;
         }
         
-        .input-section {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 2rem;
-            margin: 2rem auto;
-            max-width: 500px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            animation: fadeIn 1s ease-out 0.4s forwards;
-            opacity: 0;
-        }
-        
-        .input-group {
-            margin-bottom: 1.5rem;
-            text-align: left;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 400;
-            color: var(--text-light);
-        }
-        
-        input[type="date"] {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            border-radius: 8px;
-            border: none;
-            background: rgba(0, 0, 0, 0.3);
-            color: white;
-            font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        button {
-            background: linear-gradient(135deg, var(--accent), var(--primary));
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-            box-shadow: 0 4px 15px rgba(247, 37, 133, 0.3);
-        }
-        
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(247, 37, 133, 0.4);
-        }
-        
         .countdown-container {
-            display: none;
+            display: flex;
             justify-content: center;
             flex-wrap: wrap;
             gap: 1.5rem;
@@ -168,7 +111,7 @@
             color: rgba(255, 255, 255, 0.7);
         }
         
-        .lifetime-stats {
+        .starting-date {
             margin-top: 3rem;
             font-size: 1.1rem;
             opacity: 0.8;
@@ -181,20 +124,6 @@
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
-        }
-        
-        .stat-item {
-            margin-bottom: 0.5rem;
-            display: flex;
-            justify-content: space-between;
-        }
-        
-        .stat-label {
-            font-weight: 300;
-        }
-        
-        .stat-value {
-            font-weight: 600;
         }
         
         .floating-elements {
@@ -262,7 +191,7 @@
                 font-size: 0.8rem;
             }
             
-            .lifetime-stats {
+            .starting-date {
                 font-size: 1rem;
                 padding: 1rem;
             }
@@ -277,26 +206,10 @@
     </div>
     
     <div class="container">
-        <h1>Your Lifetime Journey</h1>
-        <p class="subtitle">Every moment is precious. See how much time has passed since you began your incredible journey on this planet.</p>
+        <h1>Time Elapsed</h1>
+        <p class="subtitle">Counting every moment since July 27, 2025 at 19:57</p>
         
-        <div class="input-section" id="input-section">
-            <div class="input-group">
-                <label for="birthdate">Enter your birthdate:</label>
-                <input type="date" id="birthdate" name="birthdate" required>
-            </div>
-            <button id="start-countdown">Begin Your Journey</button>
-        </div>
-        
-        <div class="countdown-container" id="countdown-container">
-            <div class="countdown-box">
-                <div class="countdown-value" id="years">00</div>
-                <div class="countdown-label">Years</div>
-            </div>
-            <div class="countdown-box">
-                <div class="countdown-value" id="months">00</div>
-                <div class="countdown-label">Months</div>
-            </div>
+        <div class="countdown-container">
             <div class="countdown-box">
                 <div class="countdown-value" id="days">00</div>
                 <div class="countdown-label">Days</div>
@@ -315,110 +228,57 @@
             </div>
         </div>
         
-        <div class="lifetime-stats" id="lifetime-stats">
-            <div class="stat-item">
-                <span class="stat-label">You were born on:</span>
-                <span class="stat-value" id="birthdate-display">-</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">Days lived:</span>
-                <span class="stat-value" id="total-days">-</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">Hours lived:</span>
-                <span class="stat-value" id="total-hours">-</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">Minutes lived:</span>
-                <span class="stat-value" id="total-minutes">-</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">Seconds lived:</span>
-                <span class="stat-value" id="total-seconds">-</span>
-            </div>
+        <div class="starting-date">
+            Counting from: <span id="start-date">July 27, 2025 at 19:57:00</span>
         </div>
     </div>
 
     <script>
-        document.getElementById('start-countdown').addEventListener('click', function() {
-            const birthdateInput = document.getElementById('birthdate').value;
-            
-            if (!birthdateInput) {
-                alert('Please enter your birthdate');
-                return;
-            }
-            
-            const birthdate = new Date(birthdateInput);
-            const now = new Date();
-            
-            if (birthdate > now) {
-                alert('Birthdate cannot be in the future');
-                return;
-            }
-            
-            // Hide input section and show countdown
-            document.getElementById('input-section').style.display = 'none';
-            document.getElementById('countdown-container').style.display = 'flex';
-            document.getElementById('lifetime-stats').style.display = 'block';
-            
-            // Display birthdate
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            document.getElementById('birthdate-display').textContent = birthdate.toLocaleDateString('en-US', options);
-            
-            // Start the countdown
-            updateCountdown(birthdate);
-            setInterval(() => updateCountdown(birthdate), 1000);
-        });
+        // Set the fixed start date: July 27, 2025 at 19:57:00
+        const startDate = new Date(2025, 6, 27, 19, 57, 0); // Note: months are 0-indexed (6 = July)
         
-        function updateCountdown(birthdate) {
+        // Display the formatted start date
+        const options = { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+        };
+        document.getElementById('start-date').textContent = startDate.toLocaleDateString('en-US', options);
+        
+        // Update the countdown every second
+        function updateCountdown() {
             const now = new Date();
-            const diff = now - birthdate;
+            const diff = now - startDate;
             
-            // Calculate years
-            const yearDiff = now.getFullYear() - birthdate.getFullYear();
-            const monthDiff = now.getMonth() - birthdate.getMonth();
-            const years = monthDiff < 0 || (monthDiff === 0 && now.getDate() < birthdate.getDate()) ? yearDiff - 1 : yearDiff;
-            
-            // Calculate months (excluding full years)
-            let months = now.getMonth() - birthdate.getMonth();
-            if (months < 0 || (months === 0 && now.getDate() < birthdate.getDate())) {
-                months += 12;
+            // Calculate time units if the start date has passed
+            if (diff > 0) {
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            } else {
+                // If start date is in the future, show zeros
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
             }
-            if (now.getDate() < birthdate.getDate()) {
-                months--;
-            }
-            
-            // Calculate days (in current month)
-            let days = now.getDate() - birthdate.getDate();
-            if (days < 0) {
-                const lastMonth = new Date(now.getFullYear(), now.getMonth(), 0);
-                days += lastMonth.getDate();
-            }
-            
-            // Calculate hours, minutes, seconds
-            const hours = now.getHours();
-            const minutes = now.getMinutes();
-            const seconds = now.getSeconds();
-            
-            // Calculate totals
-            const totalDays = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const totalHours = Math.floor(diff / (1000 * 60 * 60));
-            const totalMinutes = Math.floor(diff / (1000 * 60));
-            const totalSeconds = Math.floor(diff / 1000);
-            
-            // Update display
-            document.getElementById('years').textContent = years.toString().padStart(2, '0');
-            document.getElementById('months').textContent = months.toString().padStart(2, '0');
-            document.getElementById('days').textContent = days.toString().padStart(2, '0');
-            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-            
-            document.getElementById('total-days').textContent = totalDays.toLocaleString();
-            document.getElementById('total-hours').textContent = totalHours.toLocaleString();
-            document.getElementById('total-minutes').textContent = totalMinutes.toLocaleString();
-            document.getElementById('total-seconds').textContent = totalSeconds.toLocaleString();
         }
+        
+        // Initial call
+        updateCountdown();
+        
+        // Update every second
+        setInterval(updateCountdown, 1000);
     </script>
 </body>
-  </html>
+</html>
